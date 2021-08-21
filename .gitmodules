@@ -1,0 +1,3 @@
+[submodule "darwinia"]
+	path = darwinia
+	url = git@github.com:MittWillson/darwinia-image.git
