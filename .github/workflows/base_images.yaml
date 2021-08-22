@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Image
-        run: docker buildx build --platform linux/arm64 -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest -f Dockerfile.base .
+        run: docker buildx build --platform linux/arm64 -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -f Dockerfile.base .
 
       - name: Publish
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
