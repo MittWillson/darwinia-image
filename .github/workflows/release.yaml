@@ -16,7 +16,7 @@ env:
 jobs:
   release:
     name: Release Darwinia Image
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
       packages: write
@@ -29,8 +29,8 @@ jobs:
           username: "mittwillson"
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup QEMU
-        uses: docker/setup-qemu-action@v1
+      # - name: Setup QEMU
+      #   uses: docker/setup-qemu-action@v1
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v1
 
