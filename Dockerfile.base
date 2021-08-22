@@ -1,0 +1,8 @@
+FROM --platform=$TARGETPLATFORM rust
+WORKDIR /app
+RUN apt-get update && \
+  apt-get install -y cmake pkg-config libssl-dev git clang libclang-dev && \
+  rm -rf /var/lib/apt/lists/*
+RUN rustup update && rustup default nightly && rustup update nightly
+RUN rustup target add wasm32-unknown-unknown
+RUN cargo install cargo-chef 
