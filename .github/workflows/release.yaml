@@ -10,7 +10,7 @@ on:
 env:
   REGISTRY: ghcr.io
   TAG: ${{ github.event.inputs.tag }}
-  IMAGE_NAME: ${{ github.actor }}/darwinia-image
+  IMAGE_NAME: mittwillson/darwinia-runtime-image
   ORIGIN_REPO: darwinia-network/darwinia
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
+          username: "mittwillson"
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup QEMU
