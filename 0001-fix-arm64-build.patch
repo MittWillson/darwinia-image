@@ -1,0 +1,101 @@
+From 4823a63e5cd32a0f6f19c056c036821a4ca66344 Mon Sep 17 00:00:00 2001
+From: Mitt <10653144+MittWillson@users.noreply.github.com>
+Date: Sun, 22 Aug 2021 16:17:46 +0800
+Subject: [PATCH] fix arm64 build
+
+---
+ runtime/crab/src/lib.rs     | 10 +++++-----
+ runtime/darwinia/src/lib.rs | 10 +++++-----
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/runtime/crab/src/lib.rs b/runtime/crab/src/lib.rs
+index 4ef0e50..eaab82c 100644
+--- a/runtime/crab/src/lib.rs
++++ b/runtime/crab/src/lib.rs
+@@ -34,18 +34,18 @@ pub mod wasm {
+ 
+ 	#[cfg(all(
+ 		feature = "std",
+-		any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple")
++		any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple")
+ 	))]
+ 	include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
+ 
+ 	#[cfg(all(
+ 		feature = "std",
+-		not(any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple"))
++		not(any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple"))
+ 	))]
+ 	pub const WASM_BINARY: &[u8] = include_bytes!("../../../wasm/crab_runtime.compact.wasm");
+ 	#[cfg(all(
+ 		feature = "std",
+-		not(any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple"))
++		not(any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple"))
+ 	))]
+ 	pub const WASM_BINARY_BLOATY: &[u8] = include_bytes!("../../../wasm/crab_runtime.wasm");
+ 
+@@ -54,7 +54,7 @@ pub mod wasm {
+ 	pub fn wasm_binary_unwrap() -> &'static [u8] {
+ 		#[cfg(all(
+ 			feature = "std",
+-			any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple")
++			any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple")
+ 		))]
+ 		return WASM_BINARY.expect(
+ 			"Development wasm binary is not available. This means the client is \
+@@ -63,7 +63,7 @@ pub mod wasm {
+ 		);
+ 		#[cfg(all(
+ 			feature = "std",
+-			not(any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple"))
++			not(any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple"))
+ 		))]
+ 		return WASM_BINARY;
+ 	}
+diff --git a/runtime/darwinia/src/lib.rs b/runtime/darwinia/src/lib.rs
+index 3616093..6744466 100644
+--- a/runtime/darwinia/src/lib.rs
++++ b/runtime/darwinia/src/lib.rs
+@@ -71,18 +71,18 @@ pub mod wasm {
+ 
+ 	#[cfg(all(
+ 		feature = "std",
+-		any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple")
++		any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple")
+ 	))]
+ 	include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
+ 
+ 	#[cfg(all(
+ 		feature = "std",
+-		not(any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple"))
++		not(any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple"))
+ 	))]
+ 	pub const WASM_BINARY: &[u8] = include_bytes!("../../../wasm/darwinia_runtime.compact.wasm");
+ 	#[cfg(all(
+ 		feature = "std",
+-		not(any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple"))
++		not(any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple"))
+ 	))]
+ 	pub const WASM_BINARY_BLOATY: &[u8] = include_bytes!("../../../wasm/darwinia_runtime.wasm");
+ 
+@@ -91,7 +91,7 @@ pub mod wasm {
+ 	pub fn wasm_binary_unwrap() -> &'static [u8] {
+ 		#[cfg(all(
+ 			feature = "std",
+-			any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple")
++			any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple")
+ 		))]
+ 		return WASM_BINARY.expect(
+ 			"Development wasm binary is not available. This means the client is \
+@@ -100,7 +100,7 @@ pub mod wasm {
+ 		);
+ 		#[cfg(all(
+ 			feature = "std",
+-			not(any(target_arch = "x86_64", target_arch = "x86", target_vendor = "apple"))
++			not(any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64", target_vendor = "apple"))
+ 		))]
+ 		return WASM_BINARY;
+ 	}
+-- 
+2.33.0
+

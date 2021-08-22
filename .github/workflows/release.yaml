@@ -45,7 +45,9 @@ jobs:
           path: 'darwinia'
 
       - name: Build ARM64 Package
-        run: docker buildx build --platform linux/arm64 -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} .
+        run: |
+          cd darwinia && git apply 0001-fix-arm64-build.patch && cd ../
+          docker buildx build --platform linux/arm64 -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} .
 
       - name: Publish
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
