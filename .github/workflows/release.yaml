@@ -10,7 +10,7 @@ on:
 env:
   REGISTRY: ghcr.io
   TAG: ${{ github.event.inputs.tag }}
-  IMAGE_NAME: mittwillson/darwinia-image
+  IMAGE_NAME: ${{ github.actor }}/darwinia-image
   ORIGIN_REPO: darwinia-network/darwinia
 
 jobs:
