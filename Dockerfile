@@ -21,5 +21,8 @@ RUN cargo build --release
 FROM alpine as runtime
 WORKDIR /app
 
-COPY --from=builder /app/target/release/darwinia /usr/local/bin
-ENTRYPOINT ["darwinia"]
+COPY --from=builder /app/target/release/darwinia /usr/local/bin/darwinia
+
+EXPOSE 30333 9933 9944
+
+ENTRYPOINT ["/usr/local/bin/darwinia"]
