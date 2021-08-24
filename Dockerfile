@@ -18,7 +18,7 @@ COPY --from=cacher /app/target target
 COPY --from=cacher /usr/local/cargo /usr/local/cargo
 RUN cargo build --release
 
-FROM alpine:3.12 as runtime
+FROM debian:buster-slim as runtime
 WORKDIR /app
 
 COPY --from=builder /app/target/release/darwinia /usr/local/bin/darwinia

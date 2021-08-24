@@ -1,9 +1,9 @@
 # FROM --platform=$TARGETPLATFORM rust
-FROM rust:alpine
+FROM rust
 WORKDIR /app
-RUN apk add --no-cache cmake pkgconfig libressl-dev git clang clang-dev musl-dev protoc
-RUN rustup update && \
-  rustup default nightly && \
-  rustup update nightly && \
-  rustup target add wasm32-unknown-unknown && \
-  cargo install cargo-chef 
+RUN apt-get update && \
+  apt-get install -y cmake pkg-config libssl-dev git clang libclang-dev && \
+  rm -rf /var/lib/apt/lists/*
+RUN rustup update && rustup default nightly && rustup update nightly
+RUN rustup target add wasm32-unknown-unknown
+RUN cargo install cargo-chef 
