@@ -1,4 +1,4 @@
-FROM mittwillson/darwinia-builder-rust as base
+FROM ghcr.io/mittwillson/darwinia-runtime-image as base
 
 FROM base as planner
 WORKDIR /app
@@ -18,7 +18,7 @@ COPY --from=cacher /app/target target
 COPY --from=cacher /usr/local/cargo /usr/local/cargo
 RUN cargo build --release
 
-FROM base as runtime
+FROM alpine as runtime
 WORKDIR /app
 
 COPY --from=builder /app/target/release/darwinia /usr/local/bin/darwinia

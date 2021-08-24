@@ -1,5 +1,5 @@
 # FROM --platform=$TARGETPLATFORM rust
-FROM rust
+FROM rust:alpine
 WORKDIR /app
 RUN apt-get update && \
   apt-get install -y cmake pkg-config libssl-dev git clang libclang-dev && \
