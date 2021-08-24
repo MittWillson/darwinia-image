@@ -1,7 +1,7 @@
 # FROM --platform=$TARGETPLATFORM rust
 FROM rust:alpine
 WORKDIR /app
-RUN apk add --no-cache cmake pkgconfig libressl-dev git clang clang-dev musl-dev
+RUN apk add --no-cache cmake pkgconfig libressl-dev git clang clang-dev musl-dev protoc
 RUN rustup update && \
   rustup default nightly && \
   rustup update nightly && \
