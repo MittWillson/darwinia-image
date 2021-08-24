@@ -1,4 +1,4 @@
-FROM ghcr.io/mittwillson/darwinia-runtime-image as base
+FROM ghcr.io/mittwillson/darwinia-builder-rust as base
 
 FROM base as planner
 WORKDIR /app
